@@ -1,0 +1,11 @@
+<section class="panel panel-default">
+    <div class="panel-heading" ng-click="showmen(menu.title)">
+        <h1 class="panel-title"  style="cursor: pointer">{{menu.title}}</h1>
+    </div>
+    <div class="panel-body" style="{{menu.isshow}}"  >
+        <ul class="list-group list-borderless" >
+            <li class="list-group-item"  style="border:0px" ng-repeat="j in menu.submenus">{{j.title}}</li>
+
+        </ul>
+    </div>
+</section>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>06-指令与指令之间关系</title>
+    <link href="../libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+
+</head>
+<body>
+<father>
+    <son>
+        <grandson></grandson>
+    </son>
+</father>
+
+<script src="../libs/angular/angular.js"></script>
+<script>
+    (function($){
+        //link的执行是从内向外
+        $.module("demo", [])
+                .directive("father", function(){
+                    return{
+                        scope:{},
+                        restrict:"AE",
+                        template:"<div class='well'>father <div ng-transclude></div></div>",
+                        replace:false,
+                        transclude:true,
+                        controller:function($scope, $element){
+                            //通过this指向公有方法
+                            this.getFather = function (){
+                                alert('get father info!');
+                            }
+                        }
+                    }
+                })
+
+                .directive("son", function(){
+                    return{
+                        require:"?^father",
+                        scope:{},
+                        restrict:"AE",
+                        template:"<div class='well'>son <div ng-transclude></div></div>",
+                        replace:false,
+                        transclude:true,
+                        controller:function(){
+                            this.getSon= function(){
+                                alert("get son info!");
+                            }
+                        },
+                        link:function(scope, element, attr, ctrl){
+                            //调用父指令的公有方法 getFather
+                            ctrl.getFather();
+                        }
+                    }
+                })
+                .directive("grandson", function(){
+                    return{
+                        require:["?^grandson", "?^son","?^father"],
+                        scope:{},
+                        restrict:"AE",
+                        template:"<div class='well'>grandSON <div ng-transclude></div></div>",
+                        replace:false,
+                        transclude:true,
+                        controller:function(){
+                            this.getGrandSon = function(){
+                                alert("get grandson info");
+                            }
+                        },
+                        link:function(scope,element,attr,ctrl){
+                            //调用父指令的公有方法 getSon
+                            console.log(ctrl);
+                            ctrl[0].getGrandSon();
+                            ctrl[1].getSon();
+                            ctrl[2].getFather();
+                        }
+                    }
+                })
+    })(angular)
+</script>
+</body>
+</html>

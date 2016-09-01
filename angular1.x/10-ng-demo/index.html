@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="com.sh.demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>demo</title>
+    <link rel="stylesheet" href="assets/css/animate.min.css">
+    <link href="../libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <style>
+        .main.ng-enter{
+            animation: bounceInUp 1s ease-in both;
+        }
+        .main.ng-leave{
+            animation: bounceInDown 1s ease-in both;
+        }
+
+        .login.ng-enter{
+            animation: zoomIn 1s ease-in both;
+        }
+        .login.ng-leave{
+            animation: zoomOut 1s ease-in both;
+        }
+    </style>
+</head>
+<body>
+
+<div ng-view class="{{class}}"></div>
+
+<script type="text/ng-template" id="main.html">
+    <header></header>
+    <section class="container-fluid">
+        <aside class="col-md-2" ng-controller="menuController">
+            <sitemenus>
+                <menu ng-repeat="n in menus" ide="{{$index}}"></menu>
+            </sitemenus>
+        </aside>
+        <section class="col-md-7"></section>
+    </section>
+</script>
+
+<script src="../libs/angular/angular.js"></script>
+<script src="../libs/angular-animate/angular-animate.js"></script>
+<script src="../libs/angular-route/angular-route.js"></script>
+<script src="app/services/com.sh.demo.services.js"></script>
+<script src="app/controllers/com.sh.demo.controllers.js"></script>
+<script src="app/directives/com.sh.demo.directives.js"></script>
+<script src="app/app.js"></script>
+</body>
+</html>

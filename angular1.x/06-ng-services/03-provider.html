@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>通过provider创建一个服务模块</title>
+    <link href="../libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+</head>
+<body ng-controller="oneCtrl">
+
+
+<script src="../libs/angular/angular.js"></script>
+<script>
+    (function($){
+        $.module("demo",[])
+                 //provider("服务名称:xxxProvider")
+                //一般不直接使用, config()
+                .provider("oneProvider",function(){
+
+                    //this.$get 是用于暴露公共的方法或者属性
+                   this.$get = function($http){
+
+                       //用于获取baidu接口,返回查询数据
+                       //异步接口
+                       function getSearchList (){
+                           //service
+                           var _url = "https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=angular&json=1&p=3&sid=1422_17710_18284_18134_17001_12134_20856_20732_20836_20718&req=2&csor=7&pwd=angula&cb=JSON_CALLBACK"
+                           //$.ajax
+                           return $http({
+                               url:_url,
+                               method:"JSONP" //GET|POST|PUT|DELETE|JSONP
+                           })
+                       };
+
+                       //同步
+                       function sysnCall(){
+                           return {"info":"succcess"}
+                       }
+
+                       //要通过return 返回,外部才能访问到
+                       return {
+                           getBaiduSearchList:getSearchList,
+                           getSysnCall : sysnCall
+                       }
+                   }
+                })
+                .controller("oneCtrl",["$scope","oneProvider",function($scope,oneProvider){
+                       oneProvider.getBaiduSearchList().success(function(data){
+                          console.log("baidu",data.s);
+                        }).error(function(data){
+                        });
+                        console.log("sys-contrl:",oneProvider.getSysnCall());
+
+                }])
+
+    })(angular)
+</script>
+</body>
+</html>

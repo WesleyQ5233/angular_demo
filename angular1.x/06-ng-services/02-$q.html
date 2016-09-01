@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>$q demo</title>
+    <link href="../libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+</head>
+<body ng-controller="oneCtrl">
+
+
+<script src="../libs/angular/angular.js"></script>
+<script>
+    (function($){
+        $.module("demo",[])
+                .provider("oneProvider",function(){
+                    this.$get = function($http,$q){
+
+
+                        //getList 延期的请求
+                        function getList(){
+                             var _url = "https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=angular&json=1&p=3&sid=1422_17710_18284_18134_17001_12134_20856_20732_20836_20718&req=2&csor=7&pwd=angula&cb=JSON_CALLBACK"
+                             //也就是延期
+                             var defered = $q.defer();
+                             $http({
+                                url:_url,
+                                method:"JSONP" //GET|POST|PUT|DELETE|JSONP
+                             }).success(function(data){
+                                 defered.resolve(data);
+                             }).error(function(data){
+                                 defered.reject(data);
+                             });
+
+                            return defered.promise;
+                        }
+
+
+                        return {
+                            getBaiduList :getList
+                        }
+                    }
+                })
+                .controller("oneCtrl",["$scope","oneProvider",function($scope,oneProvider){
+
+                    console.log( oneProvider.getBaiduList());
+                     oneProvider.getBaiduList().then(function(successData){
+                           console.log(successData.s);
+                     },function(errorData){
+
+                     },function(noticeData){
+
+                     })
+                }])
+
+    })(angular)
+</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+http://datainfo.duapp.com/shopdata/datainfo.html
+https://api.douban.com/book/subjects?q=&alt=xd&callback=$jq
+
+
+<!--Restfull ¼Ü¹¹Ä£ÐÍ
+   http://docs.angularjs.cn/api/ngResource/service/$resource
+-->
+
+
+https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=jquery&json=1&p=3&req=2&sc=eb&csor=0&pwd=a&cb=xlw
+
+
+http://docs.ngnice.com/api/ng/service/$http#jsonp
+
+
+http://en.wikipedia.org/wiki/Futures_and_promises ¡£
+
+
+http://datainfo.duapp.com/shopdata/selectGoodes.php?selectText=%E8%A1%A3&callback=JSON_CALLBACK

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo.shop">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>search</title>
+    <link href="../libs/ionic/css/ionic.css" rel="stylesheet">
+</head>
+<body ng-controller="searchController">
+
+<header class="bar bar-assertive item-input-inset">
+    <label class="item-input-wrapper">
+        <i class="icon ion-ios-search placeholder-icon"></i>
+        <input type="text" placeholder="请输入关键字.." ng-model="kw" ng-blur="saveKw()">
+    </label>
+    <a class="button button-clear" ng-click="search()">搜索</a>
+</header>
+
+<section class="scroll-content overflow-scroll has-header" >
+    <div class="card " style="{{isShow}}">
+        <div class="item item-icon-right" ng-repeat="n in keywordsList track by $index">
+            {{n}}
+            <i class="icon ion-android-delete" style="font-size: 20px" ng-click="removeKw($index)"></i>
+        </div>
+
+    </div>
+
+    <div class="list" style="{{showsearch}}">
+        <div class="item item-thumbnail-left" ng-repeat="j in jlist">
+             <img ng-src="{{j.goodsListImg}}">
+            <p>{{j.goodsName}}</p>
+            <p>{{j.price}}</p>
+        </div>
+    </div>
+</section>
+
+<script src="../libs/angular/angular.js"></script>
+<script src="app/services/demo.shop.services.js"></script>
+<script src="app/controllers/demo.shop.controllers.js"></script>
+<script src="app/app-init.js"></script>
+</body>
+</html>

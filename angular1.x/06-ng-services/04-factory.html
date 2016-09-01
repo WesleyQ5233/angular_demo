@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>demo</title>
+    <link href="../libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+</head>
+<body ng-controller="oneCtrl">
+
+
+<script src="../libs/angular/angular.js"></script>
+<script>
+    (function($){
+        $.module("demo",[])
+                .provider("oneProvider",function(){
+                    this.$get = function(){
+
+                        function getPrv(){
+                            return "this is provider method"
+                        }
+
+                        return {
+                            getPrv:getPrv
+                        }
+
+                    }
+                })
+                .factory("oneFactory",function(){
+                    function getFac(){
+                       return "this is from factory service!"
+                    }
+
+                    return {
+                        getFac:getFac
+                    }
+
+                    //pojo
+
+                })
+                .service("oneService",function(){
+
+                    //公有方法 this.xx
+                    this.getServ = function(){
+                        return "this is form one service"
+                    }
+
+                })
+                .controller("oneCtrl",["$scope",
+                    "oneProvider",
+                    "oneFactory",
+                    "oneService",
+                    function($scope,oneProvider,oneFactory,oneService){
+                      console.log(oneProvider.getPrv())
+                      console.log(oneFactory.getFac())
+                      console.log(oneService.getServ())
+                }])
+
+    })(angular)
+</script>
+</body>
+</html>
