@@ -1,1 +1,0 @@
-var demoServ =angular.module("com.sh.demo.services",[]);
