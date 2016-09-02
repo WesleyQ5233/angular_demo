@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>02-ng-template</title>
+    <link href="../libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+</head>
+<body ng-controller="one">
+<a class="btn btn-danger" ng-click="goHref()">go main</a>
+<div ng-include="url"></div>
+
+<script type="text/ng-template" id="index.html">
+    <div class="well">
+        hello this is index.html
+    </div>
+</script>
+
+<script type="text/ng-template" id="main.html">
+    <div class="well">
+        hello this is main.html
+    </div>
+</script>
+
+<script src="../libs/angular/angular.js"></script>
+<script>
+    (function($){
+        $.module("demo",[])
+                .controller("one",function($scope){
+                    $scope.url = "index.html";//指前面的标记为id="index.html" 的页面结构
+                    $scope.goHref = function(){
+                        $scope.url = "main.html";//指前面的标记为id="main.html" 的页面结构
+                    }
+                })
+    })(angular)
+</script>
+
+</body>
+</html>

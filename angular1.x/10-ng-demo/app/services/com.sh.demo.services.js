@@ -1,3 +1,14 @@
+var demoServ =angular.module("com.sh.demo.services",[]);
+demoServ.service("stucentService",["$http",function($http){
+    this.getList = function(){
+
+    }
+}]);
+demoServ.service("teacherService",["$http",function($http){
+   this.getName = function(){
+
+   }
+}]);
 demoServ.service("menuService", function () {
 
         this.getMenu = function () {
