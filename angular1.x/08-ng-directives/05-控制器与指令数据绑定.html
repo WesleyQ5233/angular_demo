@@ -1,61 +1,65 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="demo">
+<html lang="zh-hans" ng-app="demo">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
-    <title>05-控制器与指令数据绑定</title>
+    <title>demo</title>
     <link href="../libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
 </head>
 <body>
-<!--first controller-->
+
 <div ng-controller="oneCtrl">
-    <login tl="{{oneTitle}}" cc="{{oneStyle}}" cm="oLogin(n,p)">
-        &版权所有人：xx公司
+    <login tl="{{oneTitle}}" cc="{{oneStyle}}" cm="oLogin(n,p)" >
+        &版权所有人:xx公司
     </login>
 </div>
-<!--second controller-->
+
 <div ng-controller="twoCtrl">
     <login tl="{{twoTitle}}" cc="{{twoStyle}}" cm="tLogin(n,p)">
         xxx公司管理后台
     </login>
 </div>
+
 <script src="../libs/angular/angular.js"></script>
 <script>
     (function($){
-        $.module("demo", [])
-                .directive("login", function(){
-                    return {
-                        scope:{
-                            tl:"@",//@绑定字符
-                            cc:"@",
-                            cm:"&"//& 方法
-                        },
-                        restrict:"AE",
-                        templateUrl:"app/templates/login-tpls.html",
-                        replace:false,
-                        transclude:true,
-                    }
-                })
+        $.module("demo",[])
+                .directive("login",function(){
+                     return {
+                         scope:{
+                             tl:"@", //@绑定字符
+                             cc:"@",
+                             cm:"&"   //& 方法
+                         },
+                         restrict:"AE",
+                         templateUrl:"app/templates/login-tpls.html",
+                         replace:false,
+                         transclude:true,
 
-                .service("oneServ", function(){
+                     }
+                })
+                .service("oneServ",function(){
                     this.oneLogin = function(n,p){
-                        alert("用户名："+n+"--登录成功")
-                    }
-                })
-                .service("twoServ", function(){
-                    this.twoLogin = function(n,p){
-                        alert("用户名："+n+"--登录成功")
-                    }
-                })
-                .controller("oneCtrl", function($scope, oneServ){//给对应的控制器注入了对应的服务
-                    $scope.oneTitle = "用户登录";
-                    $scope.oneStyle = "panel-primary";
-                    $scope.oLogin = function(n,p){
-                        console.log(n,p);
-                        oneServ.oneLogin(n,p);
-                    }
-                })
 
+                            alert("用户名:"+n+"--登录成功")
+
+                    }
+                })
+                .service("twoServ",function(){
+                    this.twoLogin = function(n,p){
+
+                            alert("用户名:"+n+"--登录成功")
+
+                    }
+                })
+                .controller("oneCtrl",function($scope,oneServ){
+                     $scope.oneTitle = "用户登录";
+                     $scope.oneStyle = "panel-primary";
+                     $scope.oLogin = function(n,p){
+                         console.log(n,p)
+                         oneServ.oneLogin(n,p);
+                     }
+                })
                 .controller("twoCtrl",function($scope,twoServ){
                     $scope.twoTitle = "管理员登录";
                     $scope.twoStyle="panel-danger";
@@ -66,7 +70,5 @@
                 })
     })(angular)
 </script>
-
-
 </body>
 </html>

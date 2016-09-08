@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>demo</title>
+
+    <link href="../libs/ionic/css/ionic.css" rel="stylesheet">
+    <style>
+        .spinner svg {
+            width: 100px;
+            height: 100px;
+            stroke: red;
+            fill: green;
+        }
+    </style>
+
+</head>
+<body>
+
+<ion-spinner icon="ios"></ion-spinner>
+<ion-spinner icon="android"></ion-spinner>
+<ion-spinner icon="bubbles"></ion-spinner>
+<ion-spinner icon="circles"></ion-spinner>
+<ion-spinner icon="crescent"></ion-spinner>
+
+<ion-spinner icon="dots"></ion-spinner>
+<ion-spinner icon="lines"></ion-spinner>
+<ion-spinner icon="ripple"></ion-spinner>
+<ion-spinner icon="spiral"></ion-spinner>
+<script src="../libs/ionic/js/ionic.bundle.js"></script>
+<script>
+    (function($){
+        $.module("demo",["ionic"])
+    })(angular)
+</script>
+</body>
+</html>

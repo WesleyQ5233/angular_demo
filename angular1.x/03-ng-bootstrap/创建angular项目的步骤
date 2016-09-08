@@ -1,0 +1,18 @@
+SPA
+第一步: bower install angular
+第二步: 创建宿主(host page)页面： index.html
+第三步: 在页面底部引入 angular.js
+第四步: 标注angular的管理边界 (ng-app="模块名")
+第五步: 创建根模块: angular.module("模块名",[])
+
+
+如是使用表达式,不想出现{{}},可以添加ng-cloak,
+.ng-cloak { display:none }
+
+<body ng-cloak class="ng-cloak" ng-controller="demoCtrl">
+
+
+抽象能力:
+架构师 ->  算法
+
+业务->抽取出计算机的方式 

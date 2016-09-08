@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>demo</title>
+    <link href="../libs/ionic/css/ionic.css" rel="stylesheet">
+</head>
+<body>
+
+{{rg}}
+
+<div class="range range-assertive">
+    <i class="icon ion-volume-low"></i>
+    <input type="range" min="0" max="100" step="1" value="5" ng-model="rg">
+    <i class="icon ion-volume-high"></i>
+</div>
+
+<script src="../libs/ionic/js/ionic.bundle.js"></script>
+<script>
+    (function($){
+        $.module("demo",["ionic"])
+                .directive("ionRange",function(){
+                    return {
+                        restrict:"AE",
+                        template:""
+                    }
+                })
+    })(angular)
+</script>
+</body>
+</html>

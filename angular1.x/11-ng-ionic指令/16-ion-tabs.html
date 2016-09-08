@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>tabs 实用</title>
+    <link href="../libs/ionic/css/ionic.css" rel="stylesheet">
+    <style>
+        html,body{
+            width:100%;
+            height: 100%;
+        }
+        .swiper-container  {
+            width:100%;
+            height: 160px;
+
+        }
+        .box1 {
+            width:100%;
+            height: 160px;
+            background-color: red;
+        }
+
+        .box2 {
+            width:100%;
+            height: 160px;
+            background-color: green;
+        }
+        .box3 {
+            width:100%;
+            height: 160px;
+            background-color: blueviolet;
+        }
+    </style>
+
+</head>
+<body>
+
+<ion-side-menus>
+    <ion-side-menu width="150" side="left" class="assertive-bg"></ion-side-menu>
+    <ion-side-menu-content>
+        <ion-header-bar align-title="center" class="bar-assertive ">
+            <i class="button button-clear icon ion-navicon"></i>
+            <ion-title>首页</ion-title>
+           <div class="buttons has-badge ">
+               <i class="button button-clear icon ion-ios-cart"></i>
+               <i class="badge badge-light" style="color: darkgray; position: absolute; right: 2px; width:20px; text-align: center; line-height: 20px; height: 20px; padding: 0">2</i>
+           </div>
+        </ion-header-bar>
+
+        <ion-tabs class="tabs-dark tabs-top" >
+            <ion-tab title="国内娱乐"></ion-tab>
+            <ion-tab title="国内娱乐"></ion-tab>
+            <ion-tab title="国内娱乐"></ion-tab>
+            <ion-tab title="国内娱乐"></ion-tab>
+        </ion-tabs>
+
+        <ion-content ng-controller="one" class="has-header has-subheader">
+            <ion-slides options="options" slider="data.slider">
+                <ion-slide-page>
+                    <div class="box1"></div>
+                </ion-slide-page>
+                <ion-slide-page>
+                    <div class="box2"></div>
+                </ion-slide-page>
+                <ion-slide-page>
+                    <div class="box3"></div>
+                </ion-slide-page>
+            </ion-slides>
+        </ion-content>
+
+        <ion-content style="top:248px">
+            <ion-list>
+                <ion-item class="item-thumbnail-left item-icon-right">
+                    <img ng-src="img/ben.png">
+                    <h2>adfasdfasdf</h2>
+                    <p>adfasdfasdf</p>
+                    <i class="icon ion-ios-arrow-right"></i>
+                </ion-item>
+                <ion-item class="item-thumbnail-left item-icon-right">
+                    <img ng-src="img/ben.png">
+                    <h2>adfasdfasdf</h2>
+                    <p>adfasdfasdf</p>
+                    <i class="icon ion-ios-arrow-right"></i>
+                </ion-item>
+                <ion-item class="item-thumbnail-left item-icon-right">
+                    <img ng-src="img/ben.png">
+                    <h2>adfasdfasdf</h2>
+                    <p>adfasdfasdf</p>
+                    <i class="icon ion-ios-arrow-right"></i>
+                </ion-item>
+                <ion-item class="item-thumbnail-left item-icon-right">
+                    <img ng-src="img/ben.png">
+                    <h2>adfasdfasdf</h2>
+                    <p>adfasdfasdf</p>
+                    <i class="icon ion-ios-arrow-right"></i>
+                </ion-item>
+                <ion-item class="item-thumbnail-left item-icon-right">
+                    <img ng-src="img/ben.png">
+                    <h2>adfasdfasdf</h2>
+                    <p>adfasdfasdf</p>
+                    <i class="icon ion-ios-arrow-right"></i>
+                </ion-item>
+            </ion-list>
+        </ion-content>
+        <ion-tabs class="tabs-icon-top tabs-dark has-badge">
+            <ion-tab title="首页" icon-on="ion-ios-home" icon-off="ion-ios-home-outline"></ion-tab>
+            <ion-tab title="折扣" icon-on="ion-ios-pricetags" icon-off="ion-ios-pricetags-outline"></ion-tab>
+            <ion-tab title="购物车" badge-style="badge-assertive"  badge="5" icon-on="ion-ios-cart" icon-off="ion-ios-cart-outline"></ion-tab>
+            <ion-tab title="个人" icon-on="ion-ios-person" icon-off="ion-ios-person-outline"></ion-tab>
+            <ion-tab title="更多" icon-on="ion-android-more-horizontal" icon-off="ion-android-more-horizontal"></ion-tab>
+        </ion-tabs>
+    </ion-side-menu-content>
+</ion-side-menus>
+
+<script src="../libs/ionic/js/ionic.bundle.js"></script>
+<script>
+    (function($){
+        $.module("demo",["ionic"])
+                .controller("one",function($scope,$ionicSideMenuDelegate){
+                    $scope.options = {
+                        direction: 'horizontal',
+                        loop: true,
+                        autoplay : 1000,
+                    }
+
+                    $scope.tg = function(){
+                        $ionicSideMenuDelegate.toggleLeft();
+                    }
+
+                })
+    })(angular)
+</script>
+</body>
+</html>

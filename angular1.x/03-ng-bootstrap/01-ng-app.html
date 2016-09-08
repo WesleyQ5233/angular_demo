@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-hans" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>demo</title>
+    <link href="../libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+
+<div ng-controller="demo2">{{msg}}</div>
+
+
+<script src="../libs/angular/angular.js"></script>
+<script>
+    (function($){
+        //多框架并存
+        //ng-app: 内置指令: 标记angular管理的边界
+        //ng-app: 可以指定管理的模块名称:或者为空(default)
+        angular.module("demo",[]).
+                controller("demo2",function($scope){
+            $scope.msg ="hello first angular!"
+        })
+    })(angular)
+</script>
+</body>
+</html>

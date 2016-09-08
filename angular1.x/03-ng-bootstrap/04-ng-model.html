@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>ng-model</title>
+    <link href="../libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+</head>
+<body ng-controller="oneCtrl">
+
+<input type="text" ng-model="person.name">
+<br>
+<input type="text" ng-model="person.age"><br>
+<input type="text" ng-model="person.sex"><br>
+<input type="text" ng-model="person.city"><br>
+
+
+<pre>
+    {{person | json}}
+</pre>
+
+<script src="../libs/angular/angular.js"></script>
+<script>
+    (function($){
+        $.module("demo",[])
+                .controller("oneCtrl",function($scope){
+                   $scope.person = {};
+                })
+    })(angular)
+</script>
+</body>
+</html>

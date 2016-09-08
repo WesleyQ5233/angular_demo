@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>demo</title>
+    <link href="../libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="well" ng-controller="one">
+    {{msg}}
+    <div class="well" ng-controller="two">
+        {{msg}} -- {{$parent.msg}}
+        <div class="well" ng-controller="three">
+            {{msg}} -- {{$parent.$parent.msg}}
+        </div>
+    </div>
+</div>
+
+<script src="../libs/angular/angular.js"></script>
+<script>
+    (function ($) {
+        $.module("demo", [])
+                .controller("one", function ($scope) {
+                    $scope.msg = "hello one"
+                }).controller("two", function ($scope) {
+                    $scope.msg = "hello two"
+                }).controller("three", function ($scope) {
+                    $scope.msg = "hello three"
+             })
+
+
+    })(angular)
+</script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>demo</title>
+    <link href="../libs/ionic/css/ionic.css" rel="stylesheet">
+</head>
+<body  ng-controller="one">
+
+<ion-content>
+    <ion-list>
+        <ion-item><pre>{{checkboxList|json}}</pre></ion-item>
+        <!-- input checkbox-->
+        <ion-item><input type="radio" value="hmtl"></ion-item>
+        <ion-checkbox
+                ng-repeat="n in checkboxList"
+                ng-checked="n.checked"
+                ng-model="n.checked"
+                ng-change="ckChange(n)"
+                class="checkbox-dark"
+        >{{n.title}}</ion-checkbox>
+    </ion-list>
+</ion-content>
+
+<script src="../libs/ionic/js/ionic.bundle.js"></script>
+<script>
+    (function($){
+        $.module("demo",["ionic"])
+                .controller("one",["$scope",function($scope){
+                    $scope.checkboxList = [
+                        {"title":"html5","checked":true},
+                        {"title":"jquery","checked":false},
+                        {"title":"angular","checked":true},
+                        {"title":"bootstrap","checked":false},
+                        {"title":"react","checked":true},
+                    ];
+
+                    $scope.ckChange = function(item){
+                        console.log(item);
+                    }
+                }])
+    })(angular)
+</script>
+</body>
+</html>

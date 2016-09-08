@@ -1,0 +1,15 @@
+ng-include : 同步引入外部html页面
+使用ng-include可以实现页面的分块
+
+ng-template: angular内联式模板 SPA
+             外联式模板
+             SPA 一个页面
+
+#id Single page application
+
+
+angualar创建路由的几步走:
+1.下载angular-route.js | bootcdn.cn | bower install angular-route
+2.在页面中引入 angular.route.js 独立模块 (注意:模块的继承(ngRoute))
+3.angular.module("root",["ngRoute"]):在根模块上加上ngRoute的继承
+

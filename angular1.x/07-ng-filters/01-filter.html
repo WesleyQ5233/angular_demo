@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>内置的filter</title>
+    <link href="../libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+</head>
+<body ng-controller="one">
+
+<div class="well">
+    货币格式(currency): <br>
+    {{ 66777343434.4 | currency : "￥"}} <br>
+    {{curr}}
+</div>
+
+<div class="well">
+    时间格式(Date): <br>
+    {{ vDate | date : 'medium' }} <br>
+    {{ vvData}}
+</div>
+
+<div class="well">
+    大小写转换(lowercase| uppercase): <br>
+    {{ "sdafDFDDAFadafdfasd" | lowercase  }} <br>
+    {{ "sdafDFDDAFadafdfasd" | uppercase  }} <br>
+    {{letter}}
+</div>
+
+<div class="well">
+    number的格式化(number): <br>
+    {{ 2323888238238.888638823823 | number  }} <br>
+    {{ 2323888238238.888600823823 | number :4   }} <br>
+    {{ numb }}
+</div>
+
+<div class="well">
+    json <br>
+    <pre>
+        {{ jdata | json }}
+    </pre>
+</div>
+
+
+<div class="well">
+    limitTo <br>
+    <pre>
+        {{ "hellothisis" | limitTo:3 }}
+    </pre>
+    <pre>
+     {{ jdata | limitTo:5 | json}}
+     </pre>
+</div>
+
+<div class="well">
+    orderby: <br>
+
+    <pre>{{jdata | orderBy:"name":false | json}}</pre>
+</div>
+
+<script src="../libs/angular/angular.js"></script>
+<script>
+    (function($){
+        $.module("demo",[])
+           .controller("one",function($scope,$filter){
+             //货币格式:
+             $scope.curr= $filter("currency")(66777343434.4,"RMB")
+
+             //时间格式化 Date
+             $scope.vDate= new Date();
+             $scope.vvData = $filter("date")(new Date(),"fullDate")
+
+             //lowercase
+             $scope.letter = $filter("lowercase")("aadfadsfEEEEEaaaeeEE")
+
+             $scope.numb = $filter("number")(2323888238238.888600823823,3);
+
+
+             //json
+              $scope.jdata =[
+                  {"name":"zhangsan","age":25,"sex":"male","city":"上海"},
+                  {"name":"lisi","age":21,"sex":"female","city":"北京"},
+                  {"name":"wangwu","age":19,"sex":"male","city":"杭州"},
+                  {"name":"maerzi","age":28,"sex":"male","city":"广州"},
+                  {"name":"zhaosi","age":56,"sex":"female","city":"深圳"},
+                  {"name":"liuda","age":36,"sex":"male","city":"南京"},
+              ]
+           })
+    })(angular)
+</script>
+</body>
+</html>

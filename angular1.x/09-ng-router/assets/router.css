@@ -1,0 +1,18 @@
+
+.ng-enter { z-index: 8888; }
+.ng-leave { z-index: 9999; }
+
+.main.ng-enter {
+    animation: bounceInLeft 0.5s both ;  }
+
+.main.ng-leave {
+    transform-origin: 0% 0%;
+    animation: bounce 1s both; }
+
+.index.ng-enter {
+    animation:bounceInOut 1s linear both;
+}
+
+.index.ng-leave{
+    animation:zoomOut 1s linear both;
+}

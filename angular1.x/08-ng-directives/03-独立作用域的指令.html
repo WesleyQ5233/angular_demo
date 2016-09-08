@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>demo</title>
+    <link href="../libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+
+<forms></forms>
+<forms></forms>
+<forms></forms>
+<script src="../libs/angular/angular.js"></script>
+<script>
+    (function($){
+        $.module("demo",[])
+                .directive("forms",function(){
+                    return {
+                        scope:{}, //scope：{} 创建一个独立作用域指令
+                        restrict:"AE",
+                        template:"<div class='well'><input type='text' ng-model='txt'>{{txt}}</div>",
+                        replace:true
+                    }
+                })
+    })(angular)
+</script>
+</body>
+</html>

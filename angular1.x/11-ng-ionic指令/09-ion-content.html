@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>demo</title>
+    <link href="../libs/ionic/css/ionic.css" rel="stylesheet">
+</head>
+<body ng-controller="one">
+<ion-header-bar></ion-header-bar>
+<ion-content
+        direction="y"
+        padding="false"
+        scrollbar-x="false"
+        scrollbar-y="true"
+        overflow-scroll="false"
+        start-y="0",
+        has-bouncing="true"
+>
+    <ion-list>
+        <ion-item><a class="button button-assertive" ng-click="goBot()">滚动到底部</a></ion-item>
+        <ion-item>adsfadsfasdfasdfasdfasd</ion-item>
+        <ion-item>adsfadsfasdfasdfasdfasd</ion-item>
+        <ion-item>adsfadsfasdfasdfasdfasd</ion-item>
+        <ion-item>adsfadsfasdfasdfasdfasd</ion-item>
+        <ion-item>adsfadsfasdfasdfasdfasd</ion-item>
+        <ion-item>adsfadsfasdfasdfasdfasd</ion-item>
+        <ion-item>adsfadsfasdfasdfasdfasd</ion-item>
+        <ion-item>adsfadsfasdfasdfasdfasd</ion-item>
+        <ion-item>adsfadsfasdfasdfasdfasd</ion-item>
+        <ion-item>adsfadsfasdfasdfasdfasd</ion-item>
+        <ion-item>adsfadsfasdfasdfasdfasd</ion-item>
+        <ion-item>adsfadsfasdfasdfasdfasd</ion-item>
+        <ion-item>adsfadsfasdfasdfasdfasd</ion-item>
+        <ion-item>adsfadsfasdfasdfasdfasd</ion-item>
+        <ion-item>adsfadsfasdfasdfasdfasd</ion-item>
+        <ion-item>adsfadsfasdfasdfasdfasd</ion-item>
+        <ion-item>adsfadsfasdfasdfasdfasd</ion-item>
+        <ion-item>adsfadsfasdfasdfasdfasd</ion-item>
+        <ion-item>adsfadsfasdfasdfasdfasd</ion-item>
+        <ion-item>adsfadsfasdfasdfasdfasd</ion-item>
+        <ion-item>adsfadsfasdfasdfasdfasd</ion-item>
+        <ion-item>adsfadsfasdfasdfasdfasd</ion-item>
+        <ion-item>adsfadsfasdfasdfasdfasd</ion-item>
+        <ion-item>adsfadsfasdfasdfasdfasd</ion-item>
+        <ion-item>adsfadsfasdfasdfasdfasd</ion-item>
+        <ion-item>adsfadsfasdfasdfasdfasd</ion-item>
+        <ion-item>adsfadsfasdfasdfasdfasd</ion-item>
+        <ion-item>adsfadsfasdfasdfasdfasd</ion-item>
+        <ion-item>adsfadsfasdfasdfasdfasd</ion-item>
+        <ion-item>adsfadsfasdfasdfasdfasd</ion-item>
+        <ion-item>adsfadsfasdfasdfasdfasd</ion-item>
+        <ion-item>adsfadsfasdfasdfasdfasd</ion-item>
+        <ion-item>adsfadsfasdfasdfasdfasd</ion-item>
+        <ion-item>adsfadsfasdfasdfasdfasd</ion-item>
+        <ion-item>adsfadsfasdfasdfasdfasd</ion-item>
+        <ion-item>bottom-----------------</ion-item>
+        <ion-item><a class="button button-assertive" ng-click="goUp()">滚动到顶部</a></ion-item>
+    </ion-list>
+</ion-content>
+<ion-footer-bar class="bar-balanced"></ion-footer-bar>
+<script src="../libs/ionic/js/ionic.bundle.js"></script>
+<script>
+    (function($){
+        $.module("demo",["ionic"])
+                .controller("one",function($scope,$ionicScrollDelegate){
+                   $scope.goBot = function(){
+                       $ionicScrollDelegate.scrollBottom(true);
+                   };
+
+                    $scope.goUp = function(){
+                        $ionicScrollDelegate.scrollTop(true);
+                    }
+                })
+    })(angular)
+</script>
+</body>
+</html>

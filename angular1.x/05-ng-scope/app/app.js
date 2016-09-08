@@ -1,0 +1,1 @@
+angular.module("demo.shop",["demo.shop.controllers"]);

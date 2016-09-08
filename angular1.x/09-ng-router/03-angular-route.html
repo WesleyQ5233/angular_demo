@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>angular-route</title>
+    <link href="../libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+<a href="#/main">main</a>
+<a href="#/index">index</a>
+<!--step4:需要在页面中添加 ng-view 来标记显示的位置-->
+<div ng-view></div>
+
+<script type="text/ng-template" id="main.html">
+  <div class="well">main</div>
+</script>
+
+<script type="text/ng-template" id="detail.html">
+    <div class="well">detail</div>
+</script>
+
+<script src="../libs/angular/angular.js"></script>
+<script src="../libs/angular/angular-route.js"></script>
+<script>
+    (function($){
+        //step1:创建SPA项目的根模块：继承ngRoute
+        $.module("demo",["ngRoute"])
+                //step2:通过全局config:能过$routeProvider来创建项目的路由表
+                .config(function($routeProvider){
+                    $routeProvider.when("/main",{
+                        templateUrl:"main.html",   //内联页面
+                        controller:"one",
+                        resolve:{
+                            ones:function(oneServ){
+                                return oneServ.getOne();
+                            }
+                        }
+                    }).when("/index",{
+                        templateUrl:"app/templates/test.html",  //外联页面
+                        controller:"two"
+                    }).when("/test/:id",{
+                        templateUrl:"detail.html",
+                        controller:"two"
+                    }).otherwise("/main") //通过otherwise来配置默认的页面
+                })
+                .service("oneServ",function(){
+                      this.getOne = function(){
+                          return "one"
+                      }
+                })
+                .service("twoServ",function(){
+                    this.getTow = function(){
+                        return "Tow"
+                    }
+                })
+                .controller("one",function($scope,ones,$routeParams){
+                      console.log($routeParams.id);
+                })
+                .controller("two",function($scope,$routeParams,$location){
+                    console.log($routeParams.id);
+                    $location.url("/index");
+                })
+    })(angular)
+</script>
+</body>
+</html>

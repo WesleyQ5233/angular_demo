@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>demo</title>
+    <link href="../libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+
+<div id="app1">
+ <div ng-controller="demo2">{{msg}}</div>
+</div>
+
+
+
+<div id="app2">
+    <div ng-controller="demo2">{{msg}}</div>
+</div>
+
+
+<script src="../libs/angular/angular.js"></script>
+<script>
+    (function($){
+        //多框架并存
+        //ng-app: 内置指令: 标记angular管理的边界
+        //ng-app: 可以指定管理的模块名称:或者为空(default)
+        angular.module("demo",[]).
+        controller("demo2",function($scope){
+            $scope.msg ="hello first angular!"
+        });
+
+        //angular实例化有两种方式: new angular
+        //1.需要在页面的标签上面标记 ng-app
+        //2.如果不做标记,通过angular.bootstrap方法手动启动angular
+        angular.bootstrap(document.querySelector("#app1"),["demo"]);
+
+        //为了性能考虑,angular采用的是单例的模式
+        //不能多次创建实例
+        angular.bootstrap(document.querySelector("#app2"),["demo"]);
+
+
+    })(angular)
+</script>
+</body>
+</html>

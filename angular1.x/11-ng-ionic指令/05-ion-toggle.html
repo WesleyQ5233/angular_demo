@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>ion-toggle demo</title>
+    <link href="../libs/ionic/css/ionic.css" rel="stylesheet">
+</head>
+<body ng-controller="one">
+<ion-content>
+    <pre>{{toggleList | json}}</pre>
+    <ion-toggle>飞行模式</ion-toggle>
+    <ion-toggle
+            ng-repeat="n in toggleList"
+            ng-model="n.checked"
+            ng-value="n.title"
+            ng-change="toggleChange(n)"
+            class="checkbox-assertive"
+
+    >{{n.title}}</ion-toggle>
+
+</ion-content>
+<script src="../libs/ionic/js/ionic.bundle.js"></script>
+<script>
+    (function($){
+        $.module("demo",["ionic"])
+             .controller("one",function($scope){
+                 $scope.toggleList = [
+                     {"title":"html5","checked":true},
+                     {"title":"jquery","checked":false},
+                     {"title":"angular","checked":true},
+                     {"title":"bootstrap","checked":false},
+                     {"title":"react","checked":true},
+                 ];
+
+                 $scope.toggleChange = function(item){
+                     console.log(item);
+                 }
+
+        })
+
+    })(angular)
+</script>
+</body>
+</html>

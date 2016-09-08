@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>demo</title>
+    <link href="../libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+</head>
+<body ng-controller="one">
+
+<div class="well"> {{myDate}} </div>
+
+<script src="../libs/angular/angular.js"></script>
+<script>
+    (function($){
+        $.module("demo",[])
+                .controller("one",function($scope,$interval){
+                     $scope.myDate = new Date().toLocaleTimeString();
+//                     /*setInterval(function(){
+//                         console.log($scope.myDate);
+//                         $scope.$apply(function(){
+//                             $scope.myDate = new Date().toLocaleTimeString();
+//                         });
+//
+//                     },1000)*/
+
+                    $interval(function(){
+                        $scope.myDate = new Date().toLocaleTimeString();
+                    },1000)
+                })
+
+    })(angular)
+</script>
+</body>
+</html>

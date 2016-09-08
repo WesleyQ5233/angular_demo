@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo">
+<head>
+    <meta charset="UTF-8" >
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>demo</title>
+    <link href="../libs/ionic/css/ionic.css" rel="stylesheet">
+</head>
+<body>
+
+<!--
+ align-title="left" : 设置头部标题的对齐位置: left center right
+ ios(default):center android(default):left
+
+  class="buttons"  头部的按钮组
+
+-->
+<ion-header-bar align-title="center" class="bar-dark">
+    <ion-title>微信(9)</ion-title>
+    <a class="button button-clear icon ion-ios-search"></a>
+    <a class="button button-clear icon ion-android-add"></a>
+</ion-header-bar>
+<header class="bar bar-subheader bar-calm"></header>
+
+<footer class="bar bar-subfooter bar-calm"></footer>
+<ion-footer-bar class="bar-assertive" style="justify-content: space-between">
+    <a class="button button-clear icon ion-ios-search"></a>
+    <a class="button button-clear icon ion-android-add"></a>
+    <a class="button button-clear icon ion-ios-search"></a>
+    <a class="button button-clear icon ion-android-add"></a>
+    <a class="button button-clear icon ion-ios-search"></a>
+    <a class="button button-clear "></a>
+</ion-footer-bar>
+
+<script src="../libs/ionic/js/ionic.bundle.js"></script>
+<script>
+    (function($){
+        //step:1 : bower(ionic js/css/fonts) | npm(cordova,js/css/fonts/cli) 安装ionic
+        //step2: 引入 ionic.bundle.js / ionic.css
+        //step3: 创建项目模块的时候，需要继承 ["ionic"]
+        //step4: 创建一个根模块，  继承 ["ionic"]
+
+        $.module("demo",["ionic"])
+                .directive("myHeaderBar",function(){
+                    return {
+                        restrict:"AE",
+                        template:"<header class='bar bar-assertive'>" +
+                        "<h2 class=\"title\">header</h2>" +
+                        " </header>"
+
+                    }
+                })
+
+    })(angular)
+</script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>ionRefresher 使用</title>
+    <link href="../libs/ionic/css/ionic.css" rel="stylesheet">
+
+    <style>
+        .spinner svg {
+            width:80px;
+            height: 80px;
+            fill: red;
+            stroke: green;
+        }
+    </style>
+
+</head>
+<body ng-controller="one">
+
+<ion-content>
+    <ion-refresher
+            pulling-icon="ion-arrow-graph-up-right"
+            pulling-text="释放获取新的数据"
+            spinner="lines"
+            on-pulling="doPull()"
+            on-refresh="doRefresh()"
+    ></ion-refresher>
+    <ion-list>
+        <ion-item ng-repeat="n in lists">{{n.userName}}</ion-item>
+    </ion-list>
+</ion-content>
+
+<script src="../libs/ionic/js/ionic.bundle.js"></script>
+<script>
+    (function($){
+        $.module("demo",["ionic"])
+                .service("oneServ",["$http","$q",function($http,$q){
+                    this.getMangerList = function(){
+                        var defered = $q.defer();
+                        $http({
+                            url:"http://localhost:3000/manager/list?page=1",
+                            method:"GET"
+                        }).success(function(data){
+                            defered.resolve(data.records);
+                        }).error(function(data){
+                            defered.$$reject(data);
+                        })
+
+                        return defered.promise;
+                    }
+                }])
+                .controller("one",["$scope","oneServ",function($scope,oneServ){
+                    $scope.doRefresh = function(){
+                        oneServ.getMangerList().then(function(data){
+                            $scope.lists = data;
+                            $scope.$broadcast('scroll.refreshComplete');
+                        })
+                    };
+
+                    $scope.doPull = function(){
+                        alert(1);
+                    }
+                }])
+    })(angular)
+</script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>ionRefresher 使用</title>
+    <link href="../libs/ionic/css/ionic.css" rel="stylesheet">
+
+    <style>
+        .spinner svg {
+            width:30px;
+            height: 30px;
+            fill: red;
+            stroke: green;
+        }
+    </style>
+
+</head>
+<body ng-controller="one">
+
+<ion-content>
+    <ion-refresher
+            pulling-icon="ion-arrow-graph-up-right"
+            pulling-text="释放获取新的数据"
+            spinner="lines"
+            on-pulling="doPull()"
+            on-refresh="doRefresh()"
+    ></ion-refresher>
+    <ion-list>
+        <ion-item ng-repeat="n in lists">{{n.userName}}</ion-item>
+    </ion-list>
+    <ion-infinite-scroll
+            spinner="ripple"
+            on-infinite="loadMore()"
+
+    >
+
+    </ion-infinite-scroll>
+</ion-content>
+
+<script src="../libs/ionic/js/ionic.bundle.js"></script>
+<script>
+    (function($){
+        $.module("demo",["ionic"])
+                .service("oneServ",["$http","$q",function($http,$q){
+                    this.getMangerList = function(curPage){
+                        var defered = $q.defer();
+                        $http({
+                            url:"http://localhost:3000/manager/list?page="+curPage,
+                            method:"GET"
+                        }).success(function(data){
+                            defered.resolve(data);
+                        }).error(function(data){
+                            defered.$$reject(data);
+                        })
+
+                        return defered.promise;
+                    }
+                }])
+                .controller("one",["$scope","oneServ",function($scope,oneServ){
+
+                    var count = 0;
+                    $scope.lists = [];
+                    $scope.doRefresh = function(){
+                        oneServ.getMangerList(1).then(function(data){
+                            $scope.lists = data.records;
+                            $scope.listCount = data.pageCount;
+                            $scope.pageCount = Math.ceil($scope.listCount /2);
+                            $scope.$broadcast('scroll.refreshComplete');
+                        })
+                    };
+
+                    $scope.doPull = function(){
+                        //alert(1);
+                    }
+
+//                    $scope.count =
+                    $scope.loadMore = function(){
+
+                            oneServ.getMangerList(2).then(function(data){
+
+                                console.log(data.records)
+                                data.records.forEach(function(v,i){
+                                   console.log(i);
+                                   $scope.lists.push(v);
+                                })
+
+
+                            })
+                           $scope.$broadcast('scroll.infiniteScrollComplete');
+
+                    }
+                }])
+    })(angular)
+</script>
+</body>
+</html>

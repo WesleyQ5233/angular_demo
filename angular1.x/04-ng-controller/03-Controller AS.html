@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>demo</title>
+    <link href="../libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+<section class="panel panel-primary" ng-controller="one as c">
+    <div class="panel-heading">
+        <a class="panel-title">
+            <h3>用户登录</h3>
+        </a>
+    </div>
+    <div class="panel-body">
+        <form class="form-horizontal" role="form">
+            <div class="form-group">
+                <label class="col-md-4 control-label">
+                    用户名:
+                </label>
+                <div class="col-md-6">
+                    <input type="text" ng-model="c.userInfo.name" class="form-control" placeholder="请输入用户名!">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label">
+                    密码:
+                </label>
+                <div class="col-md-6">
+                    <input type="password" ng-model="c.userInfo.pass" class="form-control" placeholder="**********">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-4">
+                    <a class="btn btn-danger" ng-click="c.login()">用户登录</a>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="panel-footer"> <pre>{{userInfo | json}}</pre>
+        {{getList}}
+    </div>
+</section>
+
+
+<script src="../libs/angular/angular.js"></script>
+<script>
+    (function($){
+        $.module("demo",[])
+                .controller("one",function(){
+                    //通过 this 代替 $scope
+                    this.userInfo = {};
+                    this.login = function(){
+                        alert(this.userInfo.name);
+                    }
+                })
+    })(angular)
+</script>
+</body>
+</html>

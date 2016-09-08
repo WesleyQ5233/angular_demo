@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="root">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>控制器Controller 创建</title>
+    <link href="../libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+</head>
+<body ng-controller="rootCtrl">
+{{msg}}
+
+<script src="../libs/angular/angular.js"></script>
+<script>
+    (function($){
+
+        //1.用于大型项目开发
+         // angular里面统一了模块的创建方式
+        //angular.module("模块名称",[依赖模块的列表])
+        var serviceModule = angular.module("servM",[]);
+        var controllerModule = angular.module("ctrlM",[]);
+        //在依赖模块的列表只能是模块的名称:并且是字符串的形式
+        var rootModule = angular.module("root",["ctrlM","servM"]);
+
+
+        //1.用于SPA型项目开发
+        //直接创建根模块.然后从根模块创建子类(controller)
+
+        //创建控制器:模块.controller("控制器名称",function(){})
+        //$scope
+        var app = angular.module("root",[])
+                .controller("rootCtrl",function($scope){
+                     $scope.msg = "hello1";
+
+                    //贫血模块
+                })
+                .controller("rootCtrl",function($scope){
+                    $scope.msg = "hello2";
+                })
+                .controller("rootCtrl",function($scope){
+                    $scope.msg = "hello3";
+                })
+
+    })(angular)
+</script>
+</body>
+</html>

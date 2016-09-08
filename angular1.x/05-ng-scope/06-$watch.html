@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>demo</title>
+    <link href="../libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+</head>
+<body ng-controller="one">
+
+<div class="well">
+    <input type="text" ng-model="txt">
+    {{txt}}
+</div>
+<div class="well">
+    <input type="text" ng-model="user.name"> <br>
+    <input type="text" ng-model="user.age"> <br>
+    <input type="text" ng-model="user.addr"> <br>
+    <input type="text" ng-model="user.sex"> <br>
+</div>
+<pre>{{user | json}}</pre>
+<script src="../libs/angular/angular.js"></script>
+<script>
+    (function($){
+        $.module("demo",[])
+                .controller("one",function($scope){
+
+                     $scope.txt = "hello";
+
+                    //$scope.$watch()用于对某个值进行监视绑定,触发dirtychecking
+                    //function(n,o) n:改变过的值, o 过去缓存的值
+                     $scope.$watch("txt",function(n,o){
+                         console.log("新值：-",n);
+                         console.log("旧值：-",o);
+                     });
+
+                    //给一个对象添加一个监视绑定,我们需要加上 true
+                    $scope.user = {};
+                    $scope.$watch("user",function(n,o){
+                        console.log("新值：-",n);
+                        console.log("旧值：-",o);
+                    },true)
+                })
+
+    })(angular)
+</script>
+</body>
+</html>

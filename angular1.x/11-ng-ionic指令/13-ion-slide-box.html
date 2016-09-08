@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>demo</title>
+    <link href="../libs/ionic/css/ionic.css" rel="stylesheet">
+    <style>
+        html,body,.slider {
+            width:100%;height: 100%;
+        }
+
+        .box1 {
+            width:100%;height: 100%;
+            background-color: red;
+        }
+        .box2 {
+            width:100%;height: 100%;
+            background-color: green;
+        }
+        .box3 {
+            width:100%;height: 100%;
+            background-color: yellow;
+        }
+        .box4 {
+            width:100%;height: 100%;
+            background-color: black;
+        }
+
+    </style>
+</head>
+<body ng-controller="one">
+
+<ion-slide-box does-continue="true"
+               slide-interval="1000"
+               auto-play="false"
+               on-slide-changed="doChange($index)"
+               pager-click="nextPage(index)">
+    <ion-slide><div class="box1"></div></ion-slide>
+    <ion-slide><div class="box2"></div></ion-slide>
+    <ion-slide><div class="box3"></div></ion-slide>
+    <ion-slide><div class="box4"></div></ion-slide>
+</ion-slide-box>
+
+<script src="../libs/ionic/js/ionic.bundle.js"></script>
+<script>
+    (function($){
+        $.module("demo",["ionic"])
+                .controller("one",function($scope,$ionicSlideBoxDelegate){
+
+                    $scope.nextPage = function(index){
+                        $ionicSlideBoxDelegate.slide(index);
+                    };
+
+                    $scope.doChange = function(index){
+                        console.log(index)
+                    }
+                })
+    })(angular)
+</script>
+</body>
+</html>

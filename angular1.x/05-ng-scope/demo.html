@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>demo</title>
+    <style>
+        .box span{
+            display: inline-block;
+            width:30px;
+            height: 35px;
+            line-height: 35px;
+            text-align: center;
+            font-size: 26px;
+            cursor: pointer;
+        }
+        .box span input {
+            width:30px;
+            height: 30px;
+            border: 1px solid gainsboro;
+            line-height: 25px;
+            text-align: center;
+            font-size: 16px;
+        }
+    </style>
+    <link href="../libs/ionic/css/ionic.css" rel="stylesheet">
+</head>
+<body ng-controller="one">
+<header class="bar bar-header bar-positive">
+    <a class="title">购物车</a>
+</header>
+<header class="bar bar-subheader bar-dark">
+    <a class="title">商品数量: {{totalQul}}  应付金额: {{totalMoney}}</a>
+</header>
+<section class="scroll-content has-header has-subheader">
+   <div class="list">
+       <div ng-repeat="n in data" class="item item-thumbnail-left item-icon-right">
+           <img ng-src="assets/e2.jpg">
+           <p>{{n.title}}</p>
+           <p>单价: {{n.price}}</p>
+           <p class="box">数量:
+               <span ng-click="addQul($index)">+</span>
+               <span><input type="text" ng-model="n.quality"></span>
+               <span ng-click="subQul($index)">-</span>
+           </p>
+           <i ng-click="revData($index)" class="icon ion-android-delete" style="font-size: 16px"></i>
+       </div>
+   </div>
+</section>
+<footer class="tabs tabs-dark tabs-icon-top">
+    <div class="tab-item">
+        <i class="icon ion-ios-home"></i>
+        首页
+    </div>
+    <div class="tab-item">
+        <i class="icon ion-ios-home"></i>
+        首页
+    </div>
+    <div class="tab-item has-badge">
+        <i class="icon ion-ios-home"></i>
+        <i class="badge badge-energized">445</i>
+        首页
+    </div>
+    <div class="tab-item">
+        <i class="icon ion-ios-home"></i>
+        首页
+    </div>
+</footer>
+
+<script src="../libs/ionic/js/ionic.bundle.js"></script>
+<script>
+    (function($){
+        $.module("demo",["ionic"])
+                .controller("one",function($scope){
+                    $scope.data = [
+                        {
+                            "title":"休闲零食膨化食品19.9包邮礼包",
+                            "price":666,
+                            "quality":1,
+                            "pic":"assets/77f4.jpg"
+                        },
+                        {
+                            "title":"UYUK九分裤 男2016夏装 男士新款小脚",
+                            "price":888,
+                            "quality":1,
+                            "pic":"assets/a13.jpg"
+                        },
+                        {
+                            "title":"厚生记休闲零食大礼包礼盒 满",
+                            "price":222,
+                            "quality":1,
+                            "pic":"assets/e2.jpg"
+                        }
+                    ];
+                    countCart(1);
+
+                    function countCart(d){
+                        $scope.totalQul=0;
+                        $scope.totalMoney =0;
+                        angular.forEach($scope.data,function(v){
+                            $scope.totalQul += v.quality;
+                            $scope.totalMoney += (v.price * v.quality)*d;
+                        })
+                    }
+
+                    $scope.addQul = function(index){
+                         $scope.data[index].quality = $scope.data[index].quality +1;
+                        countCart(1);
+                    }
+                    $scope.subQul = function(index){
+
+                        if($scope.data[index].quality-1 <=0){
+                            $scope.data[index].quality =1;
+                        }else{
+                            $scope.data[index].quality = $scope.data[index].quality -1;
+                        }
+
+                        countCart(1);
+                    }
+
+                    $scope.revData = function(index){
+                        $scope.data.splice(index,1);
+                        countCart(1);
+                    }
+
+
+                    $scope.$watch("data",function(n,o){
+                        console.log(n)
+                         if(n[0].quality >=10){
+                            alert("送一包洗衣粉");
+                         }
+                    },true);
+
+                })
+    })(angular)
+</script>
+</body>
+</html>

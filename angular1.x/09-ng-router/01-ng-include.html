@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>ng-include</title>
+    <link href="../libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+</head>
+<body ng-controller="one">
+
+<div ng-include="url"></div>
+
+<div ng-include="url2"></div>
+
+
+<script src="../libs/angular/angular.js"></script>
+<script src="../libs/angular-animate/angular-animate.js"></script>
+<script src="../libs/angular/angular-route.js"></script>
+<script>
+    (function($){
+        $.module("demo",[])
+                .controller("one",function($scope){
+                     $scope.url ="app/templates/main.html";
+                    $scope.url2="app/templates/index.html";
+
+
+                })
+    })(angular)
+</script>
+</body>
+</html>

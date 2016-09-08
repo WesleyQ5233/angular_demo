@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="m3">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>创建angular模块</title>
+    <link href="../libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+</head>
+<body ng-controller="m1Ctrl">
+
+{{msg1}}
+
+<script src="../libs/angular/angular.js"></script>
+<script>
+    (function(){
+
+
+        //模块之间关系 : 继承关系
+        var m1 = angular.module("m1",[]);
+        m1.controller("m1Ctrl",function($scope){
+            $scope.msg1="hello this is m1Ctrl!"
+        });
+
+
+        var m2 = angular.module("m2",["m1"]);
+        m2.controller("m2Ctrl",function($scope){
+            $scope.msg2="hello this is m2Ctrl!"
+        });
+
+
+        var m3 = angular.module("m3",["m2"]);
+        m3.controller("m3Ctrl",function($scope){
+            $scope.msg3="hello this is m3Ctrl!"
+        })
+
+
+
+    })()
+</script>
+</body>
+</html>

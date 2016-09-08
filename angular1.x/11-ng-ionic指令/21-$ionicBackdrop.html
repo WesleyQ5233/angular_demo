@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>背景层</title>
+    <link href="../libs/ionic/css/ionic.css" rel="stylesheet">
+</head>
+<body ng-controller="one">
+
+<ion-header-bar class="bar-assertive">
+    <i class="button button-clear icon ion-android-add" ng-click="doDb()"></i>
+    <ion-title>首页</ion-title>
+</ion-header-bar>
+
+<script src="../libs/ionic/js/ionic.bundle.js"></script>
+<script>
+    (function($){
+        $.module("demo",["ionic"])
+                .controller("one",function($scope,$timeout,$ionicBackdrop){
+                    $scope.doDb = function(){
+                        // retain
+                        $ionicBackdrop.retain();
+
+                        $timeout(function(){
+                            $ionicBackdrop.release();
+                        },1000)
+                    }
+
+    })
+    })(angular)
+</script>
+</body>
+</html>

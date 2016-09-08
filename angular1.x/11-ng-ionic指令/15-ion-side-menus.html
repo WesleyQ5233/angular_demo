@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>ionSideMenus 应用 </title>
+    <link href="../libs/ionic/css/ionic.css" rel="stylesheet">
+    <style>
+        html,body{
+            width:100%;
+            height: 100%;
+        }
+        .swiper-container  {
+            width:100%;
+            height: 200px;
+
+        }
+        .box1 {
+            width:100%;
+            height: 200px;
+            background-color: red;
+        }
+
+        .box2 {
+            width:100%;
+            height: 200px;
+            background-color: green;
+        }
+        .box3 {
+            width:100%;
+            height: 200px;
+            background-color: blueviolet;
+        }
+    </style>
+</head>
+<body ng-controller="one">
+
+
+    <ion-side-menus>
+        <ion-side-menu width="120" class="balanced-bg" side="left"></ion-side-menu>
+        <ion-side-menu-content class="energized-bg">
+            <ion-header-bar class="bar-assertive">
+                <i class="button button-clear icon ion-navicon" ng-click="tg()"></i>
+                <ion-title>首页</ion-title>
+            </ion-header-bar>
+            <ion-content>
+               <ion-slides options="options" slider="data.slider">
+                   <ion-slide-page>
+                       <div class="box1"></div>
+                   </ion-slide-page>
+                   <ion-slide-page>
+                       <div class="box2"></div>
+                   </ion-slide-page>
+                   <ion-slide-page>
+                       <div class="box3"></div>
+                   </ion-slide-page>
+               </ion-slides>
+            </ion-content>
+            <ion-content style="top:244px">
+                  <ion-list>
+                      <ion-item class="item-thumbnail-left item-icon-right">
+                           <img ng-src="img/ben.png">
+                           <h2>adfasdfasdf</h2>
+                           <p>adfasdfasdf</p>
+                          <i class="icon ion-ios-arrow-right"></i>
+                      </ion-item>
+                      <ion-item class="item-thumbnail-left">
+                          <img ng-src="img/ben.png">
+                          <h2>adfasdfasdf</h2>
+                          <p>adfasdfasdf</p>
+                      </ion-item>
+                      <ion-item class="item-thumbnail-left">
+                          <img ng-src="img/ben.png">
+                          <h2>adfasdfasdf</h2>
+                          <p>adfasdfasdf</p>
+                      </ion-item>
+                      <ion-item class="item-thumbnail-left">
+                          <img ng-src="img/ben.png">
+                          <h2>adfasdfasdf</h2>
+                          <p>adfasdfasdf</p>
+                      </ion-item>
+                      <ion-item class="item-thumbnail-left">
+                          <img ng-src="img/ben.png">
+                          <h2>adfasdfasdf</h2>
+                          <p>adfasdfasdf</p>
+                      </ion-item>
+                  </ion-list>
+            </ion-content>
+            <ion-footer-bar class="bar-dark"></ion-footer-bar>
+        </ion-side-menu-content>
+        <!--<ion-side-menu class="assertive-bg" side="right"></ion-side-menu>-->
+    </ion-side-menus>
+
+
+
+<script src="../libs/ionic/js/ionic.bundle.js"></script>
+<script>
+    (function($){
+        $.module("demo",["ionic"])
+                .controller("one",function($scope,$ionicSideMenuDelegate){
+                    $scope.options = {
+                        direction: 'horizontal',
+                        loop: true
+                    }
+
+                    $scope.tg = function(){
+                        $ionicSideMenuDelegate.toggleLeft();
+                    }
+
+                })
+    })(angular)
+</script>
+</body>
+</html>

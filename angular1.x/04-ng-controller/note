@@ -1,0 +1,18 @@
+错误总结:
+1.
+[$injector:modulerr] Failed to instantiate module com.1000phone.demo due to:
+Error: [$injector:modulerr] Failed to instantiate module ionic due to:
+Error: [$injector:nomod] Module 'ionic' is not available! You either misspelled the module name or forgot to load it. If registering a module ensure that you specify the dependencies as the second argument.
+
+破解：
+如果是$injector 报的错：查看["ionic"]模块是否存在
+
+
+2.Uncaught Error: [$injector:nomod] Module 'com.1000phone.demo' is not available! You either misspelled the module name or forgot to load it. If registering a module ensure that you specify the dependencies as the second argument.
+
+3.
+angular.js:13920 ReferenceError: $scope is not defined
+
+
+
+4.angular.js:13920 Error: [$injector:unpr] Unknown provider: $sProvider <- $s <- one

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>demo</title>
+    <link href="../libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+</head>
+<body ng-controller="one">
+
+{{name}}
+
+<script src="../libs/angular/angular.js"></script>
+<script>
+    (function($){
+
+        $.module("demo",[])
+                //run 是angular的main方法
+        //是在angular启动之后第一个调用的方法,所有叫做main方法
+                //run 进行全局设置 run(function(){})
+                .run(function(){
+                    //js 安全问题
+                    alert("your permissions is limited");
+                        widnow.locatin="/"
+                    return false;
+                })
+                .controller("one",["$scope",function(s){
+                    s.name="heloo"
+                }])
+
+
+    })(angular)
+</script>
+</body>
+</html>

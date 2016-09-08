@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>angular.element===jquery($(""))</title>
+    <style>
+        .box2 {
+            width: 100px;
+            height: 200px;
+            background-color: red;
+
+            animation:adds 1s linear;
+        }
+
+        @keyframes adds {
+            from {
+                width: 100px;
+                background-color: red;
+            }
+
+            to {
+                width: 500px;
+                background-color: green;
+            }
+        }
+    </style>
+    <link href="../libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+</head>
+<body ng-controller="demoCtrl">
+
+<div id="box"></div>
+
+<a class="btn btn-danger" ng-click="showme()">点击一次看看!</a>
+
+<!--<script src="../libs/jquery/dist/jquery.js"></script>-->
+<script src="../libs/angular/angular.js"></script>
+<script>
+    (function($){
+        //在angular开发中,不能随便操作dom
+        //只能在指令内部操作dom
+        //因为angular是以数据为中心
+        //jq-lite=== mini jquery
+        $.module("demo",[])
+                .controller("demoCtrl",function($scope){
+                     console.log(angular.element);
+
+                    //不能这么写,我演示而已
+                    $scope.showme = function(){
+                        angular.element(document.querySelector("#box")).addClass("box2")
+                    }
+
+
+                })
+    })(angular)
+</script>
+</body>
+</html>

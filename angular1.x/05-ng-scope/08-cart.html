@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo.shop">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>demo</title>
+    <style>
+        .box span {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            font-size: 20px;
+            text-align: center;
+            background-color: grey;
+            border-radius: 3px;
+            color: #fff;
+        }
+
+        .box span input {
+            border:1px solid grey;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            font-size: 20px;
+            text-align: center;
+        }
+    </style>
+    <link href="../libs/ionic/css/ionic.css" rel="stylesheet">
+</head>
+<body ng-controller="cartController">
+
+<header class="bar bar-header bar-assertive">
+    <a class="title">购物车</a>
+</header>
+<header class="bar bar-subheader bar-dark">
+    <a class="title">商品数量：{{totalQal}} 应付金额: {{totalPrice}}</a>
+</header>
+<section class="scroll-content has-header has-subheader has-footer overflow-scroll">
+    <div class="list">
+        <div ng-repeat="n in dataList" class="item item-thumbnail-left item-icon-right">
+            <img ng-src="{{n.pic}}">
+            <p>{{n.title}}</p>
+            <p>单价: {{n.price}} ￥</p>
+            <p class="box">数量: <span ng-click="add($index)">+</span><span><input type="text" ng-model="n.quality"></span><span ng-click="sub($index)">-</span></p>
+        </div>
+    </div>
+</section>
+<footer class="tabs tabs-icon-top tabs-dark">
+    <div class="tab-item">
+        <i class="icon ion-ios-home"></i>
+        首页
+    </div>
+    <div class="tab-item">
+        <i class="icon ion-ios-mic"></i>
+        分类
+    </div>
+    <div class="tab-item has-badge">
+        <i class="icon ion-ios-cart"></i>
+        <i class="badge badge-assertive">{{totalQal}}</i>
+        购物车
+    </div>
+    <div class="tab-item">
+        <i class="icon ion-ios-person"></i>
+        个人
+    </div>
+    <div class="tab-item">
+        <i class="icon ion-ios-more"></i>
+        更多
+    </div>
+</footer>
+
+<script src="../libs/angular/angular.js"></script>
+<script src="app/controllers/demo.shop.controllers.js"></script>
+<script src="app/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>加载(ionicLoading)服务</title>
+    <link href="../libs/ionic/css/ionic.css" rel="stylesheet">
+</head>
+<body >
+
+<!--<ion-header-bar class="bar-assertive">-->
+    <!--<i class="button button-clear icon ion-android-add" ng-click="doDb()"></i>-->
+    <!--<ion-title>首页</ion-title>-->
+<!--</ion-header-bar>-->
+
+
+<ion-nav-view></ion-nav-view>
+
+<script type="text/ng-template" id="login.html">
+  hello
+    <a href="#/main">go main</a>
+</script>
+
+<script type="text/ng-template" id="main.html">
+    main
+    <a href="#/login">go login</a>
+</script>
+
+
+<script src="../libs/ionic/js/ionic.bundle.js"></script>
+<script>
+    (function($){
+        $.module("demo",["ionic"])
+                .config(function($stateProvider){
+                    $stateProvider.state("login",{
+                        url:"/login",
+                        templateUrl:"login.html"
+                    }).state("main",{
+                        url:"/main",
+                        templateUrl:"main.html",
+                        controller:"one"
+                    })
+                })
+                .controller("one",function($scope,$timeout,$ionicLoading){
+
+                    $ionicLoading.show({
+                        templateUrl:"templates/loading.html",
+                        delay:0,
+                        noBackdrop:false,
+                        hideOnStateChange:true,
+                        animation: 'fade-out',
+                        duration:2000
+                    });
+
+
+//                    $timeout(function(){
+//                        $ionicLoading.hide();
+//                    },2000)
+
+                })
+    })(angular)
+</script>
+</body>
+</html>

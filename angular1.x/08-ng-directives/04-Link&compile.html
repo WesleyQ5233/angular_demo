@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>demo</title>
+    <link href="../libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+
+<div ng-controller="oneCtrl">
+   <hello dd="helo" cc="ok" cm="test()"></hello>
+</div>
+
+<script src="../libs/angular/angular.js"></script>
+<script src="../libs/angular-animate/angular-animate.js"></script>
+<script src="../libs/angular/angular-route.js"></script>
+<script>
+    (function($){
+        $.module("demo",[])
+                .controller("oneCtrl",function($scope){
+                    $scope.test = function(){
+                        alert("this is from oneCtrl!");
+                    }
+                })
+                .directive("hello",function(){
+                    return {
+                        restrict:"AE",
+                        template:"<div class='well'>{{txt}}</div>",
+                        //link用于指令内部,处理template的逻辑
+                        //link angular编译的最后一个关键function
+                        //link,可以进行dom
+                        link:function(scope,element,attr,ctrl){
+                           //scope:link 与 template之间数据关系
+                            scope.doCli= function(){
+                                alert(1);
+                            }
+
+                            scope.txt = "hell angular";
+
+                            //jqlite === mini jquery $("hello").addClass().removeClass()
+                            //element: angular.element(document.querySelector("hello"))
+                            element.on("click",function(){
+                                scope.$apply(attr.cm)
+                            })
+
+                            //attr:来获取 指令上自定义的值
+                            console.log(attr.cc,attr.dd);
+
+                            scope.txt = attr.cc;
+
+
+
+                        }
+                    }
+                })
+    })(angular)
+</script>
+</body>
+</html>

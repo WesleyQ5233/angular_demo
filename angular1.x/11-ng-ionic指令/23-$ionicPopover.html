@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>demo</title>
+    <link href="../libs/ionic/css/ionic.css" rel="stylesheet">
+</head>
+<body ng-controller="one">
+
+<ion-header-bar class="bar-assertive">
+    <ion-title>浮动层</ion-title>
+    <i class="button button-clear icon ion-android-add" ng-click="showPop($event)"></i>
+</ion-header-bar>
+<ion-tabs class="tabs-icon-top tabs-dark has-badge">
+    <ion-tab title="首页" icon-on="ion-ios-home" icon-off="ion-ios-home-outline"></ion-tab>
+    <ion-tab title="折扣" icon-on="ion-ios-pricetags" icon-off="ion-ios-pricetags-outline"></ion-tab>
+    <ion-tab title="购物车" badge-style="badge-assertive"  badge="5" icon-on="ion-ios-cart" icon-off="ion-ios-cart-outline"></ion-tab>
+    <ion-tab title="个人" icon-on="ion-ios-person" icon-off="ion-ios-person-outline"></ion-tab>
+    <ion-tab title="更多" icon-on="ion-android-more-horizontal" icon-off="ion-android-more-horizontal" ng-click="showPop($event)"></ion-tab>
+</ion-tabs>
+<script type="text/ng-template" id="popover.html">
+   <ion-popover-view>
+       <ion-header-bar>
+           <ion-title>popover层</ion-title>
+       </ion-header-bar>
+       <ion-content>
+           popover层
+       </ion-content>
+   </ion-popover-view>
+</script>
+
+<script src="../libs/ionic/js/ionic.bundle.js"></script>
+<script>
+    (function($){
+        $.module("demo",["ionic"])
+                .controller("one",function($scope,$ionicPopover){
+
+                    $ionicPopover.fromTemplateUrl("popover.html",{
+                        scope:$scope,
+                        animation:"fade-in"
+                    }).then(function(popover){
+                        $scope.popover = popover;
+                    })
+
+                    $scope.showPop = function($event){
+                        $scope.popover.show($event);
+                    }
+
+                })
+
+    })(angular)
+</script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>demo</title>
+    <link href="img/animate.css" rel="stylesheet">
+    <link href="../libs/ionic/css/ionic.css" rel="stylesheet">
+    <style>
+        html,body,.scroll {
+            width:100%;height: 100%;
+        }
+
+        .box1 {
+            width:100%;height: 100%;
+            background-color: red;
+        }
+        .box2 {
+            width:100%;height: 100%;
+            background-color: green;
+        }
+        .box3 {
+            width:100%;height: 100%;
+            background-color: yellow;
+        }
+        .box4 {
+            width:100%;height: 100%;
+            background-color: black;
+        }
+
+    </style>
+</head>
+<body ng-controller="one">
+
+<ion-content>
+    <ion-slides options="options" slider="data.slider">
+        <ion-slide-page>
+            <div class="box1">
+                <p class="ani" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.5s" swiper-animate-delay="0.3s">
+                    <img src="img/adam.jpg">
+                </p>
+            </div>
+        </ion-slide-page>
+        <ion-slide-page>
+            <div class="box2"></div>
+        </ion-slide-page>
+        <ion-slide-page>
+            <div class="box3"></div>
+        </ion-slide-page>
+        <ion-slide-page>
+            <div class="box4"></div>
+        </ion-slide-page>
+    </ion-slides>
+</ion-content>
+
+<script src="../libs/ionic/js/ionic.bundle.js"></script>
+<script src="img/swiper.animate1.0.2.min.js"></script>
+<script>
+    (function($){
+        $.module("demo",["ionic"])
+                .controller("one",function($scope){
+
+                    $scope.options = {
+                        direction: 'horizontal',
+                        loop: true,
+                        onInit: function(swiper){ //Swiper2.x的初始化是onFirstInit
+                            swiperAnimateCache(swiper); //隐藏动画元素
+                            swiperAnimate(swiper); //初始化完成开始动画
+                        },
+                        onSlideChangeEnd: function(swiper){
+                            swiperAnimate(swiper); //每个slide切换结束时也运行当前slide动画
+                        }
+                    }
+                })
+    })(angular)
+</script>
+</body>
+</html>

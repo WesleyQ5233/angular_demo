@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>demo</title>
+    <link href="../libs/ionic/css/ionic.css" rel="stylesheet">
+</head>
+<body>
+<ion-nav-bar>
+    <ion-nav-title></ion-nav-title>
+</ion-nav-bar>
+
+<ion-nav-view animation="slide-left-right"></ion-nav-view>
+
+<script type="text/ng-template" id="home">
+    <ion-view view-title="home">
+        home
+    </ion-view>
+</script>
+
+<script type="text/ng-template" id="shop">
+    <ion-view view-title="shop">
+        shop
+    </ion-view>
+</script>
+<script type="text/ng-template" id="tabs">
+    <ion-tabs class="tabs-icon-top  tabs-color-active-positive">
+        <ion-tab title="首页" icon-on="ion-ios-home" icon-off="ion-ios-home">
+            <ion-nav-view name="menus-home"></ion-nav-view>
+        </ion-tab>
+        <ion-tab title="店铺" icon-on="ion-ios-home" icon-off="ion-ios-home" >
+            <ion-nav-view name="menus-shop"></ion-nav-view>
+        </ion-tab>
+    </ion-tabs>
+</script>
+
+<script src="../libs/ionic/js/ionic.bundle.js"></script>
+<script>
+    (function($){
+        $.module("demo",["ionic"])
+                .service("oneSev",function($http,$q){
+                    this.testSev = function(a,b){
+                        return a+b;
+                    }
+                })
+                .controller("oneCtrl",function($scope,tt,$state){
+                    console.log(tt,$state.current.data.A);
+                })
+                .controller("shopCtrl",function($scope,$state){
+
+                })
+                .config(function($stateProvider,$urlRouterProvider){
+                    $stateProvider
+                            .state("menus",{
+                                url:"/tabs",
+                                abstract:true, //当abstract设置为true时,当前的state不显示,只用作子视频继承
+                                templateUrl:"tabs"
+                            })
+                            .state("menus.shop",{
+                                url:"/shop",
+                                views:{
+                                    "menus-shop":{
+                                        templateUrl:"shop",
+                                        controller:"shopCtrl"
+                                    }
+                                }
+                            })
+                            .state("menus.home",{ //继承父路由
+                                url:"/home",
+                                views:{  //子视图
+                                    "menus-home":{
+                                        templateUrl:"home",
+                                        controller:"oneCtrl",
+                                    }
+                                },
+                                //在路由到达前预载入一系列依赖或者数据，然后注入到控制器中。
+                                //函数的返回值将作为依赖注入项，如果函数是一个耗时的操作，
+                                //那么控制器必须等待该函数执行完成（be resolved）才会被实例化。
+                                resolve: {
+                                    tt:["oneSev",function(oneSev){
+                                        return oneSev.testSev(1,2);
+                                    }]
+                                },
+                                onEnter:function(tt,$state){
+                                    console.log(tt);
+                                    $state.go("menus.shop")
+                                },
+                                onExit:function(){
+                                    //$state.go("menus.shop")
+                                },
+                                //对象提供自定义数据
+                                data:{
+                                    A:"test A data"  //$state.current.data.A
+                                }
+                            })
+                })
+    })(angular)
+</script>
+</body>
+</html>

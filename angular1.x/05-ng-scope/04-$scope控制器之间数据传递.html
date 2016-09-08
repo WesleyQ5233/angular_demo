@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>demo</title>
+    <link href="../libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+</head>
+<body >
+
+
+<div class="well" ng-controller="one">
+    {{msg}}
+    <div class="well" ng-controller="two">
+        {{msg}} -- <a class="btn btn-danger" ng-click="touchMe()">点击我,会发生...</a>
+        <div class="well" ng-controller="three">
+            {{msg}}
+        </div>
+    </div>
+</div>
+
+<script src="../libs/angular/angular.js"></script>
+<script>
+    (function($){
+        $.module("demo",[])
+
+                .controller("one",["$scope",function($scope){
+                    $scope.msg ="hello one";
+                    //$scope.$on("tow-em",function(e,data){})
+                    $scope.$on("tow-em",function(e,data){
+                        $scope.msg= $scope.msg +"--"+ data;
+                    })
+
+                }])
+                .controller("two",["$scope",function($scope){
+                    $scope.msg ="hello two";
+                    $scope.touchMe = function(){
+                        //$scope.$emit(k,v) 完成子类向父类的控制器传递事件
+                        $scope.$emit("tow-em","to one this is a gift!");
+
+                        //$scope.$broadcast(k,v) 向下传递事件和数据
+                        $scope.$broadcast("two-bd","to three ,this is a command!")
+                    }
+
+                }])
+                .controller("three",["$scope","$rootScope",function(sa,s){
+                    sa.msg ="hello three";
+
+                    sa.$on("two-bd",function(e,data){
+                        sa.msg =  sa.msg  + "----"+data;
+                    })
+
+                }])
+
+    })(angular)
+</script>
+</body>
+</html>

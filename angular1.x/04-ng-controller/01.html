@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    (function(){
+        function Person(){
+            this.name2="xx";
+            this.age = "100"
+        }
+
+        Person.prototype.sayWord = function(){
+            return "im person";
+        }
+
+        window.Person = Person;
+    })();
+
+
+    (function(){
+        function Student(){
+            this.name="zhangsan";
+            this.age = "23"
+        }
+
+        Student.prototype.learnWord = function(){
+            //堆内存
+            //DI : 由第三方进行 类的实例化
+//            var p = new Person();
+            //$injector 系统级别的内存管理模块
+            var p = $injector("Person")
+            p.name = "xxx";
+
+            alert("im student"+"---" + p.sayWord());
+        }
+
+        window.Student = Student;
+    })();
+
+    (function(){
+        function Teacher(){
+            this.name="zhangsan";
+            this.age = "23"
+        }
+
+        Student.prototype.learnWord = function(){
+            //堆内存
+            var p = new Person();
+            p.name ="ss";
+
+            alert("im student"+"---" + p.sayWord());
+        }
+
+        window.Student = Student;
+    })();
+
+
+    (function(){
+        var s = new Student();
+        s.learnWord();
+    })();
+</script>
+</body>
+</html>

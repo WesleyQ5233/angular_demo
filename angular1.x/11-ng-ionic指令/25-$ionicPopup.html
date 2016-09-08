@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>demo</title>
+    <link href="../libs/ionic/css/ionic.css" rel="stylesheet">
+</head>
+<body ng-controller="one">
+
+<a class="button button-full button-balanced" ng-click="alertA()">alert</a>
+<a class="button button-full button-assertive" ng-click="confirm()">confirm</a>
+
+<a class="button button-full button-dark" ng-click="prompTest()">promp</a>
+
+<script src="../libs/ionic/js/ionic.bundle.js"></script>
+<script>
+    (function($){
+        $.module("demo",["ionic"])
+                .controller("one",function($scope,$ionicPopup){
+
+                    $scope.data = {};
+
+
+                    //$ionicPopup.alert({})
+                    $scope.alertA = function(){
+                        $ionicPopup.alert({
+                            title:"测试一下",
+                            templateUrl:"templates/main.html"
+                        })
+                    };
+
+
+                    //确定
+                    $scope.confirm = function(){
+                        $ionicPopup.confirm({
+                            cancelText:"取消",
+                            okText:"确定",
+                            okType:"button-balanced",
+                            title:"您确需要删除这个吗?",
+                            template:"html5,您确需要删除这个吗?"
+                        }).then(function(res){
+                            if(res){
+                                console.log("确认删除")
+                            }else{
+                                console.log("取消")
+                            }
+                        })
+                    }
+
+                    $scope.prompTest = function(){
+                        $ionicPopup.show({
+                            template:"<input type='text' ng-model='data.wifi'>",
+                            title:"输入wifi的ssid名称",
+                            subTitle:"输入一个吧",
+                            scope:$scope,
+                            buttons:[
+                                {text:"取消"},
+                                {
+                                    text:"<b>保存</b>",
+                                    type:"button-assertive", //css样式名
+                                    onTap:function(e){
+                                        if(!$scope.data.wifi){
+                                            e.preventDefault();
+                                        }else{
+                                            return $scope.data.wifi;
+                                        }
+
+                                    }
+                                }
+                            ]
+                        });
+                    }
+
+                })
+    })(angular)
+</script>
+</body>
+</html>

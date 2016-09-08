@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>自定义指令</title>
+    <link href="../libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+</head>
+<body ng-controller="one">
+
+<hello>asdfsadfasdfsd</hello>
+<div hello>asdfasdfasdf</div>
+
+<div>
+    <div></div>
+</div>
+
+<script src="../libs/angular/angular.js"></script>
+<script>
+    (function($){
+        $.module("demo",[])
+                //创建一个自定义指令(组件Component)
+                .directive("hello",function(){
+                      return {
+                          //A:attribute E:element C:class M:notation
+                          restrict:"AECM",  //限制自定义指令的在html显示方式:
+                          //模块 html inline //inline:提供给第三方使用
+                          templateUrl:"app/templates/hello.html",
+                          //template:"<div class='well'>hello angular component <div ng-transclude class='well'></div></div>",
+                          replace:false, //replace:true template中的会覆盖 标签内的内容
+                          transclude:true  // 保留(置换)标签内的内容 ng-transclude
+                      }
+                })
+                .controller("one",function($scope){
+
+                })
+    })(angular)
+</script>
+</body>
+</html>

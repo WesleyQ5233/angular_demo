@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>上拉菜单 ActionSheet</title>
+    <link href="../libs/ionic/css/ionic.css" rel="stylesheet">
+</head>
+<body ng-controller="one">
+
+<a class="button button-full button-assertive" ng-click="doShow()" >actionsheet</a>
+
+<script src="../libs/ionic/js/ionic.bundle.js"></script>
+<script>
+    (function($){
+        $.module("demo",["ionic"])
+                .controller("one",function($scope,$ionicActionSheet){
+
+                    $scope.doShow = function(){
+                        $ionicActionSheet.show({
+                            //自定义的按钮
+                            buttons:[
+                                {text:"<b>分享</b>内容"},
+                                {text:"移去"}
+                            ],
+                            //红色显示的按钮，删除
+                            destructiveText: 'Delete',
+                            //destructiveText:"删除",
+                            titleText:"分享内容",
+                            cancelText:"取消",
+                            destructiveButtonClicked:function(){
+                                 return true;
+                            },
+                            cancel:function(){
+
+                            },
+                            //除了删除之外的事件响应
+                            buttonClicked:function(index){
+                               console.log(index);
+                            }
+                        });
+                    }
+
+                })
+    })(angular)
+</script>
+</body>
+</html>

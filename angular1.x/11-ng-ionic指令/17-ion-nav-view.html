@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>demo</title>
+    <link href="../libs/ionic/css/ionic.css" rel="stylesheet">
+</head>
+<body>
+
+<a class="button button-assertive" href="#/main">go main</a>
+<a class="button button-assertive" ui-sref="home">go index</a>
+<!--step3: 创建spa 路由页面的显示位置: ui-view 没有页面切换动画 ion-nav-view-->
+<div ui-view></div>
+<!--<ion-nav-view></ion-nav-view>-->
+
+<script type="text/ng-template" id="content.html">
+    content
+    <div ui-view="c1"></div>
+    <div ui-view="c2"></div>
+</script>
+
+<script type="text/ng-template" id="c1.html">
+    c1
+</script>
+
+
+<script type="text/ng-template" id="c2.html">
+    c2
+</script>
+
+<script type="text/ng-template" id="home.html">
+  homeasdfasdfasdfasdfasdfas
+</script>
+
+<script type="text/ng-template" id="tabs.html">
+    tabs
+    <div ui-view="home-view"></div>
+</script>
+
+
+<script type="text/ng-template" id="tabs-home.html">
+    tabs-home.html
+</script>
+<script src="../libs/ionic/js/ionic.bundle.js"></script>
+<script>
+    (function($){
+
+        //$routeProvider $stateProvider
+        //config routetable
+        //index.html
+        //spa ng-view ng-view
+        //ui-router
+
+        $.module("demo",["ionic"])//$routeProvider.otherwise("")
+        //step1: 通过全局的config方法注入$stateProvider
+                .config(function($stateProvider,$urlRouterProvider){
+
+                    //如果找不到指定的hash地址,默认跳转
+                    $urlRouterProvider.otherwise("/main");
+
+
+                    //step2:stateProvider创建路由表
+                    $stateProvider.state("home",{
+                        url:"/home/:id" , // #/home
+                        templateUrl:"home.html", //view
+                        controller:"homeCtrl", //model of view
+                        resolve: {  //
+                            tt:function(){
+                                alert("您没有访问权限");
+                                return "ok"
+                            }
+                        }
+                    }).state("main",{
+                        url:"/main",
+                        templateUrl:"templates/main.html",
+                        controller:"mainCtrl"
+                    }).state("content",{
+                        url:"/content",
+                        views: { //配置子视图
+                            "":{  //"" 父视图(ui-view)
+                                templateUrl:"content.html"
+                            },
+                            "c1@content":{  //c1@content 包含关系
+                                templateUrl:"c1.html"
+                            },
+                            "c2@content":{
+                                templateUrl:"c2.html"
+                            }
+                        }
+                    }).state("tabs",{
+                        url:"/tabs",
+                        abstract:true,   //抽象tabs,不会显示
+                        templateUrl:"tabs.html"
+                    }).state("tabs.home",{ //tabs.home 表示一种继承
+                        url:"/home",
+                        views:{
+                            "home-view":{
+                                templateUrl:"tabs-home.html"
+                            },
+                            "home-view2":{
+                                templateUrl:"tabs-hoem1.html"
+                            }
+                        }
+                    })
+                })
+                .controller("mainCtrl",function($scope){
+
+                })
+                .controller("homeCtrl",function($scope,tt,$stateParams){
+                          console.log($stateParams.id);
+                })
+
+    })(angular)
+</script>
+</body>
+</html>

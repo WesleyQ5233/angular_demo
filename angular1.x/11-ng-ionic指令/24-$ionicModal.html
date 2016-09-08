@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>模态框 $ionicModal</title>
+    <link href="../libs/ionic/css/ionic.css" rel="stylesheet">
+</head>
+<body ng-controller="one">
+
+<ion-header-bar class="bar-assertive" align-title="center">
+    <ion-title>首页</ion-title>
+    <div class="buttons">
+        <i class="button button-clear icon" ng-click="showLogin()">登录</i>
+    </div>
+</ion-header-bar>
+
+
+<script type="text/ng-template" id="login">
+ <ion-modal-view>
+     <ion-content>
+         <ion-header-bar class="bar-dark">
+             <ion-title>用户登录</ion-title>
+             <i class="button button-clear icon" ng-click="doClose()">关闭</i>
+         </ion-header-bar>
+         <ion-content>
+             login
+         </ion-content>
+     </ion-content>
+ </ion-modal-view>
+</script>
+
+<script src="../libs/ionic/js/ionic.bundle.js"></script>
+<script>
+    (function($){
+        $.module("demo",["ionic"])
+                .controller("one",function($scope,$ionicModal){
+                     //step1: 创建一个 ion-modal-view一个模板
+                     //step2: $ionicModal 读取模板
+                     $ionicModal.fromTemplateUrl("login",{
+                         scope:$scope,
+                         animation:"slide-in-up"
+                     }).then(function(modal){
+                         $scope.modal = modal;
+                     });
+
+
+                     $scope.showLogin = function(){
+                           $scope.modal.show();
+                     }
+
+                     $scope.doClose = function(){
+                          $scope.modal.hide();
+                     }
+
+                    $scope.$on('modal.hidden', function(e,data) {
+                        alert("are you really!");
+                    });
+                })
+    })(angular)
+</script>
+</body>
+</html>

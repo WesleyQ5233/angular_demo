@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>demo</title>
+    <link href="../libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+</head>
+<body ng-controller="one">
+
+<expander>
+    <panel ng-repeat="n in panels" idx="{{$index}}"></panel>
+</expander>
+
+
+<script src="../libs/angular/angular.js"></script>
+<script>
+    (function($){
+        $.module("demo",[])
+                .controller("one",function($scope){
+                    $scope.panels = [
+                        {"title":"系统管理"},
+                        {"title":"菜单管理"},
+                        {"title":"管理员管理"},
+                    ];
+                })
+                .directive("expander",function(){
+                    return {
+                        scope:{},
+                        restrict:"AE",
+                        template:"<div ng-transclude></div>",
+                        replace:false,
+                        transclude:true,
+                        controller:function($scope,$element){
+                            var panels = [
+                                {"title":"系统管理","ishow":true},
+                                {"title":"菜单管理","ishow":true},
+                                {"title":"管理员管理","ishow":true},
+                            ];
+                            this.getMenu = function(index){
+                                return panels[index];
+                            }
+
+                            this.show = function(index){
+                                panels.forEach(function(v,i){
+                                    if(panels[i] == panels[index]){
+                                        panels[i].ishow = true;
+                                    }else{
+                                        panels[i].ishow = false;
+                                    }
+                                })
+                            }
+                        }
+                    }
+                })
+                .directive("panel",function(){
+                    return {
+                        scope:{},
+                        require:"?^expander",
+                        restrict:"AE",
+                        templateUrl:"app/templates/panel.html",
+                        replace:false,
+                        transclude:true,
+                        link:function(scope,element,attrs,ctrl){
+                            console.log(attrs["idx"]);
+                            scope.menu = ctrl.getMenu(attrs["idx"]);
+                            scope.show = function(){
+                                ctrl.show(attrs["idx"]);
+                            };
+                        }
+                    }
+                })
+    })(angular)
+</script>
+</body>
+</html>

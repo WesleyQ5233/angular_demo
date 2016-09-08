@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>demo</title>
+    <link href="../libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+
+
+<script src="../libs/angular/angular.js"></script>
+<script src="../libs/angular-animate/angular-animate.js"></script>
+<script src="../libs/angular/angular-route.js"></script>
+<script>
+    (function($){
+
+    })(angular)
+</script>
+</body>
+</html><!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo.dev">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>demo</title>
+    <link href="../libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+
+<header></header>
+<section class="container-fluid">
+    <aside class="col-md-3" ng-controller="menuController">
+        <sitemenus>
+            <menu ng-repeat="n in menus" ide="{{$index}}"></menu>
+        </sitemenus>
+
+    </aside>
+    <section class="col-md-7"></section>
+</section>
+<script src="../libs/angular/angular.js"></script>
+<script src="src/services/demo.dev.services.js"></script>
+<script src="src/controllers/demo.dev.controllers.js"></script>
+<script src="src/directives/demo.dev.directives.js"></script>
+<script src="src/app-init.js"></script>
+</body>
+</html>

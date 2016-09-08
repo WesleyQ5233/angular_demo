@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>demo</title>
+    <link href="../libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+</head>
+<body >
+  {{hello}}
+
+<div class="well" ng-controller="one">
+    {{msg}} -- {{hello}}
+    <div class="well" ng-controller="two">
+        {{msg}}--{{msg2}} -- {{hello}}
+        <div class="well" ng-controller="three">
+            {{msg}}
+        </div>
+    </div>
+</div>
+
+<script src="../libs/angular/angular.js"></script>
+<script>
+    (function($){
+        $.module("demo",[])
+                .run(function($rootScope){
+                    $rootScope.hello = "hi";
+                })
+                .controller("one",["$scope",function($scope){
+                     $scope.msg ="hello one";
+                     $scope.msg2= "hello this is one"
+                }])
+                .controller("two",["$scope",function($scope){
+                    $scope.msg ="hello two";
+                    var msg2 = "hello this is tow"
+                }])
+                .controller("three",["$scope","$rootScope",function(sa,s){
+                    sa.msg ="hello three";
+
+                }])
+
+    })(angular)
+</script>
+</body>
+</html>

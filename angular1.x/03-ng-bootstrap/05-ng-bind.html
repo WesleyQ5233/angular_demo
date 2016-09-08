@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>angular表达式(Expressions)</title>
+    <link href="../libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+</head>
+<body ng-controller="demoCtrl">
+
+{{ msg }}
+
+<span ng-bind="msg"></span>
+
+<script src="../libs/angular/angular.js"></script>
+<script>
+    (function($){
+
+        $.module("demo",[])
+                .controller("demoCtrl",function($scope){
+                    $scope.msg = "hello"
+                })
+
+    })(angular)
+</script>
+</body>
+</html>

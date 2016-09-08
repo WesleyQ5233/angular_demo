@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>demo</title>
+    <link href="../libs/ionic/css/ionic.css" rel="stylesheet">
+</head>
+<body ng-controller="one">
+
+<ion-header-bar class="bar-dark"></ion-header-bar>
+<ion-content>
+    <ion-list>
+        <ion-item>当前选择的值为:{{data.v}}</ion-item>
+        <!--input type=radio ng-model-->
+        <ion-radio
+                ng-repeat="n in radioList"
+                ng-value="n.val"
+                ng-model="data.v"
+                ng-change="radioChange(n)"
+        >{{n.title}}</ion-radio>
+    </ion-list>
+</ion-content>
+<ion-footer-bar class="bar-balanced"></ion-footer-bar>
+<script src="../libs/ionic/js/ionic.bundle.js"></script>
+<script>
+    (function($){
+        $.module("demo",["ionic"])
+                .controller("one",function($scope){
+
+                    $scope.data = {
+                        v:"h5"
+                    }
+
+                    $scope.radioList = [
+                        {"title":"html5","val":"h5"},
+                        {"title":"jquery","val":"jq"},
+                        {"title":"angular","val":"ng"},
+                        {"title":"bootstrap","val":"bt"}
+
+                    ];
+
+                    $scope.radioChange = function(item){
+                        console.log(item)
+                        if(item.title==="html5"){
+                            alert("congradulation! yuexin 10000 dolar");
+                        }
+                    }
+                })
+    })(angular)
+</script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>内置的filter</title>
+    <link href="../libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+</head>
+<body ng-controller="one">
+
+<div class="well">搜索： <input type="text" placeholder="请输入关键字" ng-model="txt"></div>
+<table class="table table-bordered">
+    <thead>
+       <tr>
+           <th>姓名</th>
+           <th>年龄</th>
+           <th>性别</th>
+           <th>城市</th>
+           <th>管理</th>
+       </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><input type="text" ng-model="n" placeholder="请输入过滤关键字"></td>
+            <td><input type="text" ng-model="a" placeholder="请输入过滤关键字"></td>
+            <td><input type="text" ng-model="s" placeholder="请输入过滤关键字"></td>
+            <td><input type="text" ng-model="c" placeholder="请输入过滤关键字"></td>
+            <td>delete</td>
+        </tr>
+        <tr ng-repeat="n in jdata | pager: curPage*pageSize | limitTo:pageSize | filter:{'name':n,'age':a,'sex':s,'city':c}">
+            <td>{{n.name}}</td>
+            <td>{{n.age}}</td>
+            <td>{{n.sex}}</td>
+            <td>{{n.city}}</td>
+            <td><a class="btn btn-danger">删除</a></td>
+        </tr>
+        <tr>
+            <td colspan="5">
+                共{{pageCount}}页 ,当前第 <input ng-model="curPage" style="width: 20px"> 页
+                <button class="btn btn-danger" ng-click="curPage=0" ng-disabled="curPage == 0">首页</button>
+                <button class="btn btn-danger" ng-click="curPage=curPage-1" ng-disabled="curPage <=0">上一页</button>
+                <button class="btn btn-danger" ng-click="curPage=curPage+1" ng-disabled="curPage >=pageCount-1">下一页</button>
+                <button class="btn btn-danger" ng-click="curPage=pageCount-1" ng-disabled="curPage==pageCount-1">尾页</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+<script src="../libs/angular/angular.js"></script>
+<script>
+    (function($){
+        $.module("demo",[])
+                .filter("pager",function(){
+                    return function(data,start){
+                        console.log(data.slice(start))
+                        return data.slice(start);
+                    }
+                })
+                .controller("one",function($scope,$filter){
+
+                    //json
+                    $scope.jdata =[
+                        {"name":"zhangsan","age":25,"sex":"male","city":"上海"},
+                        {"name":"lisi","age":21,"sex":"female","city":"北京"},
+                        {"name":"wangwu","age":19,"sex":"male","city":"杭州"},
+                        {"name":"maerzi","age":28,"sex":"male","city":"广州"},
+                        {"name":"zhaosi","age":56,"sex":"female","city":"深圳"},
+                        {"name":"liuda","age":36,"sex":"male","city":"南京"},
+                    ];
+
+                    //当前页码: curPage=0
+                    //每页显示多少条: pageSize:2
+                    //总页数: Math.ceil(jdata.length / pageSize)
+
+                    $scope.curPage = 0;
+                   // $scope.pageNo = $scope.curPage + 1;
+                    $scope.pageSize = 2;
+                    $scope.pageCount =Math.ceil($scope.jdata.length / $scope.pageSize)
+
+                    //curPage ++
+                    //curPage * pageSize
+
+
+                   // $scope.jdata.slice(curPage * pageSize)
+
+                })
+    })(angular)
+</script>
+</body>
+</html>

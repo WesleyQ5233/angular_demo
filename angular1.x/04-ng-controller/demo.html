@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-hans" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>demo</title>
+    <link href="../libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="well" ng-controller="one">
+    <div class="form-group">
+        省： <select
+                   ng-model="myData.pro"
+                   class="form-control" ng-options="p.province for p in chinaCity"></select>
+    </div>
+    <div class="form-group">
+        市： <select
+                   ng-model="myData.city"
+                   class="form-control" ng-options="c.city for c in myData.pro.cities"></select>
+    </div>
+    <div class="form-group">
+        区： <select
+                   ng-model="myData.area"
+                   class="form-control" ng-options="a for a in myData.city.areas"></select>
+    </div>
+</div>
+
+<script src="../libs/angular/angular.js"></script>
+<script>
+    (function ($) {
+
+        $.module("demo", [])
+                .controller("one", function ($scope) {
+
+                    //
+                    $scope.myData = {
+                        "pro":"",
+                        "city":"",
+                        "area":""
+                    }
+
+                    //从服务层获取一个数据
+                    $scope.chinaCity = [
+                        {
+                            "province": "安徽省",
+                            "cities": [
+                                {
+                                    "city": "合肥市",
+                                    "areas": ["政务区", "包河区", "蜀山区"]
+                                },
+                                {
+                                    "city": "安庆市",
+                                    "areas": ["望京区", "大观区", "迎江区"]
+                                }
+                            ]
+                        },
+                        {
+                            "province": "河南省", "cities": [
+                            {
+                                "city": "郑州市",
+                                "areas": ["二7区", "新区", "中原区"]
+                            },
+                            {
+                                "city": "洛阳市",
+                                "areas": ["洛水区", "西关区", "老城区"]
+                            }
+                        ]
+                        },
+                        {
+                            "province": "江苏省", "cities": [
+                            {
+                                "city": "南京市",
+                                "areas": ["江宁区", "玄武区", "鼓楼区"]
+                            },
+                            {
+                                "city": "苏州市",
+                                "areas": ["姑苏区", "平江区", "苍浪区"]
+                            }]
+                        }]
+                })
+
+    })(angular)
+</script>
+</body>
+</html>
