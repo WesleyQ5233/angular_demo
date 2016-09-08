@@ -3,7 +3,7 @@ angular1.x作为前端框架的“始祖”，系统地学习它对你学习其�
 下图为本demo的目录
 
 
-![image](https://github.com/WesleyQ5233/angular_learning/blob/master/readme/menu.png)
+![angular1.x学习目录](https://github.com/WesleyQ5233/angular_learning/blob/master/readme/menu.png)
 
 
 在最后，放入了大量的ionic（1.x）指令学习的示例吆.
