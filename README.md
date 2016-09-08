@@ -1,5 +1,4 @@
-# angular_learning
-demos that illustrate my blog.
+
 angular1.x作为前端框架的“始祖”，系统地学习它对你学习其他的框架，比如vue/react等也是有很大裨益的。
 下图为本demo的目录
 
